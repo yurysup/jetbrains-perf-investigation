@@ -1,0 +1,11 @@
+{
+    "max_primes": [
+        10,
+        100,
+        1000,
+        10000
+    ],
+    "iterations": 10,
+    "timeout_seconds": 5,
+    "binary": "PerformanceInvestigationCpp_v6"
+}
