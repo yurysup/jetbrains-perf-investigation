@@ -52,9 +52,9 @@ class PrimeCalculator {
 };
 
 int main(int argc, char **argv) {
-  for (int prime: PrimeCalculator::getPrimes(std::stoi(argv[1]))) {
-    std::cout << prime << std::endl;
-  }
-
-  return 0;
+    std::vector<int> primeNumbers = PrimeCalculator::getPrimes(std::stoi(argv[1]));
+    if (!primeNumbers.empty()) {
+        std::cout << primeNumbers.back() << std::endl;
+    };
+    return 0;
 }
