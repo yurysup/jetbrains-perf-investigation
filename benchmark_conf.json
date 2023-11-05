@@ -3,7 +3,9 @@
         10,
         100,
         1000,
-        10000
+        10000,
+        100000,
+        1000000
     ],
     "benchmark": {
         "iterations": 10,
@@ -15,6 +17,10 @@
     },
     "binaries": [
         "PerformanceInvestigationCpp_v0",
+        "PerformanceInvestigationCpp_v1",
+        "PerformanceInvestigationCpp_v2",
+        "PerformanceInvestigationCpp_v3",
+        "PerformanceInvestigationCpp_v4",
         "PerformanceInvestigationCpp_v5"
     ]
 }

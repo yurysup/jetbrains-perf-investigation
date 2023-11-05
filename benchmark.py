@@ -6,7 +6,8 @@ import json
 import os
 import signal
 import numpy as np
-from functools import wraps
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def read_config() -> dict:
@@ -40,6 +41,49 @@ def write_csv_report(aggregated_data, filename="reports/report.csv"):
         writer.writeheader()
         for data_dict in aggregated_data:
             writer.writerow(data_dict)
+
+
+def plot_png_report(dataframe: pd.DataFrame) -> None:
+    # Separate the data by binary version
+    grouped = dataframe.groupby("binary")
+
+    # Create a figure with 3 subplots
+    fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(10, 15))
+    # Exec_time depending on max_prime for all binaries
+    for name, group in grouped:
+        axes[0].plot(
+            group["max_prime"], group["average_execution_time"], marker="o", label=name
+        )
+    axes[0].set_xlabel("Max Prime")
+    axes[0].set_ylabel("Average Execution Time (s)")
+    axes[0].set_xscale("log")
+    axes[0].legend()
+    axes[0].set_title("Execution Time vs Max Prime")
+
+    # Memory depending on max_prime for all binaries
+    for name, group in grouped:
+        axes[1].plot(
+            group["max_prime"], group["average_memory"], marker="o", label=name
+        )
+    axes[1].set_xlabel("Max Prime")
+    axes[1].set_ylabel("Average Memory (KB)")
+    axes[1].set_xscale("log")
+    axes[1].legend()
+    axes[1].set_title("Memory Usage vs Max Prime")
+
+    # CPU depending on max_prime for all binaries
+    for name, group in grouped:
+        axes[2].plot(
+            group["max_prime"], group["average_cpu_pct"], marker="o", label=name
+        )
+    axes[2].set_xlabel("Max Prime")
+    axes[2].set_ylabel("Average CPU Usage (%)")
+    axes[2].set_xscale("log")
+    axes[2].legend()
+    axes[2].set_title("CPU Usage vs Max Prime")
+    # Adjust layout
+    plt.tight_layout()
+    plt.savefig("./reports/comparison.png")
 
 
 def exec_process(binary: str, max_prime: int):
@@ -170,3 +214,5 @@ for binary in binaries:
             print(f"    Average CPU used: {mean_cpu:.0f} %")
 
 write_csv_report(aggregated_data)
+df = pd.DataFrame(aggregated_data)
+plot_png_report(dataframe=df)
