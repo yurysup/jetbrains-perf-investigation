@@ -100,10 +100,6 @@ int main(int argc, char **argv) {
         allPrimes.insert(allPrimes.end(), allPrimesSegments[i].begin(), allPrimesSegments[i].end());
     }
 
-    for (int i: allPrimes)
-        std::cout << i << ' ';
-    //std::sort(allPrimes.begin(), allPrimes.end());
-
     std::cout << allPrimes.back() << std::endl;
     return 0;
 }
