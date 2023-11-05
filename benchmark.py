@@ -44,43 +44,38 @@ def write_csv_report(aggregated_data, filename="reports/report.csv"):
 
 
 def plot_png_report(dataframe: pd.DataFrame) -> None:
-    # Separate the data by binary version
+    labels = [
+        {
+            "group": "average_execution_time",
+            "ylable": "Average Execution Time (s)",
+            "title": "Execution Time vs Max Prime",
+        },
+        {
+            "group": "average_memory",
+            "ylable": "Average Memory (KB)",
+            "title": "Memory Usage vs Max Prime",
+        },
+        {
+            "group": "average_cpu_pct",
+            "ylable": "Average CPU Usage (%)",
+            "title": "CPU Usage vs Max Prime",
+        },
+    ]
     grouped = dataframe.groupby("binary")
-
     # Create a figure with 3 subplots
     fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(10, 15))
-    # Exec_time depending on max_prime for all binaries
-    for name, group in grouped:
-        axes[0].plot(
-            group["max_prime"], group["average_execution_time"], marker="o", label=name
-        )
-    axes[0].set_xlabel("Max Prime")
-    axes[0].set_ylabel("Average Execution Time (s)")
-    axes[0].set_xscale("log")
-    axes[0].legend()
-    axes[0].set_title("Execution Time vs Max Prime")
-
-    # Memory depending on max_prime for all binaries
-    for name, group in grouped:
-        axes[1].plot(
-            group["max_prime"], group["average_memory"], marker="o", label=name
-        )
-    axes[1].set_xlabel("Max Prime")
-    axes[1].set_ylabel("Average Memory (KB)")
-    axes[1].set_xscale("log")
-    axes[1].legend()
-    axes[1].set_title("Memory Usage vs Max Prime")
-
-    # CPU depending on max_prime for all binaries
-    for name, group in grouped:
-        axes[2].plot(
-            group["max_prime"], group["average_cpu_pct"], marker="o", label=name
-        )
-    axes[2].set_xlabel("Max Prime")
-    axes[2].set_ylabel("Average CPU Usage (%)")
-    axes[2].set_xscale("log")
-    axes[2].legend()
-    axes[2].set_title("CPU Usage vs Max Prime")
+    for idx, label in enumerate(labels):
+        for name, group in grouped:
+            axes[idx].plot(
+                group["max_prime"], group[label["group"]], marker="o", label=name
+            )
+            axes[idx].set_xlabel("Max Prime")
+            axes[idx].set_ylabel(label["ylable"])
+            axes[idx].set_xscale("log")
+            axes[idx].legend()
+            axes[idx].set_title(label["title"])
+            if label["group"] == "average_execution_time":
+                axes[idx].axhline(y=timeout, color="r", linestyle="--", label="timeout")
     # Adjust layout
     plt.tight_layout()
     plt.savefig("./reports/comparison.png")
