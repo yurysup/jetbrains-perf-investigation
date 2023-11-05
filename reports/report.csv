@@ -1,5 +1,9 @@
-test_label,max_prime,average_execution_time,average_memory,average_cpu_pct
-PerformanceInvestigationCpp_v6,10,0.0106231689453125,496.0,0.0
-PerformanceInvestigationCpp_v6,100,0.009637928009033203,497.2,0.0
-PerformanceInvestigationCpp_v6,1000,0.010390877723693848,498.0,6.6
-PerformanceInvestigationCpp_v6,10000,0.01009225845336914,504.0,6.6
+binary,max_prime,average_execution_time,average_memory,average_cpu_pct
+PerformanceInvestigationCpp_v0,10,0.0076926684999999995,774.4,69.4
+PerformanceInvestigationCpp_v0,100,0.010391738200000005,1346.8,174.5
+PerformanceInvestigationCpp_v0,1000,0.027082489700000007,7078.0,222.7
+PerformanceInvestigationCpp_v0,10000,0.24423637930000006,64536.0,225.5
+PerformanceInvestigationCpp_v5,10,0.008285246199999995,508.0,3.3
+PerformanceInvestigationCpp_v5,100,0.007816166299999993,508.0,3.3
+PerformanceInvestigationCpp_v5,1000,0.0074494068999999994,508.0,6.6
+PerformanceInvestigationCpp_v5,10000,0.007583074500000064,516.0,0.0

@@ -30,7 +30,7 @@ def get_gtime_measurements(gtime_output: str) -> dict:
 def write_csv_report(aggregated_data, filename="reports/report.csv"):
     with open(filename, "w", newline="") as csvfile:
         fieldnames = [
-            "test_label",
+            "binary",
             "max_prime",
             "average_execution_time",
             "average_memory",
@@ -155,7 +155,7 @@ for binary in binaries:
             mean_cpu = np.mean(cpu_measurements)
             aggregated_data.append(
                 {
-                    "test_label": binary,
+                    "binary": binary,
                     "max_prime": max_prime,
                     "average_execution_time": mean_time,
                     "average_memory": mean_memory,
