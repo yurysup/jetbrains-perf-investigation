@@ -2,10 +2,19 @@
     "max_primes": [
         10,
         100,
-        1000,
-        10000
+        1000000,
+        10000000
     ],
-    "iterations": 10,
-    "timeout_seconds": 5,
-    "binary": "PerformanceInvestigationCpp_v6"
+    "benchmark": {
+        "iterations": 10,
+        "timeout_seconds": 10
+    },
+    "warmup": {
+        "iterations": 1,
+        "timeout_seconds": 30
+    },
+    "binaries": [
+        "PerformanceInvestigationCpp_v0",
+        "PerformanceInvestigationCpp_v5"
+    ]
 }
