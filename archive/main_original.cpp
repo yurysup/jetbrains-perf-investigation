@@ -42,7 +42,9 @@ class PrimeCalculator {
 
     std::vector<int> primeNumbersToRemove;
     std::mutex primeNumbersToRemoveMutex;
-
+      
+    // inefficient work division for threads - spawning too many threads to check divisilibity of a single number
+    // lock on .push_back() is inevitable but can cause performance problems
     std::vector<std::future<void>> futures;
     for (int candidate: primeNumbers) {
       auto future = std::async([candidate, &primeNumbers, &primeNumbersToRemove, &primeNumbersToRemoveMutex]() {
@@ -58,7 +60,8 @@ class PrimeCalculator {
     for (auto &future: futures) {
       future.wait();
     }
-
+      
+    // erasing by finding an element to erase is inefficient
     for (int toRemove: primeNumbersToRemove) {
       primeNumbers.erase(std::find(primeNumbers.begin(), primeNumbers.end(), toRemove));
     }
@@ -79,6 +82,7 @@ class PrimeCalculator {
 };
 
 int main(int argc, char **argv) {
+    // excessive stdout can cause performance problems
   for (int prime: PrimeCalculator::getPrimes(std::stoi(argv[1]))) {
     std::cout << prime << std::endl;
   }

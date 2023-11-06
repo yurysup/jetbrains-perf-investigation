@@ -40,6 +40,8 @@ is provided at [benchmark calibration report](https://github.com/yurysup/jetbrai
 
 [Optimization report](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/analysis/Optimization.docx) added at `/analysis` dir with benchmark and profiling results.
 
+Issues found in original solution are added as comments to [main_original.cpp](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/archive/main_original.cpp).
+
 ### Versions benchmarked
 
 All compiled binaries can be found at `/bin`.
