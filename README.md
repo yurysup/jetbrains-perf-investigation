@@ -36,6 +36,24 @@ Investigation into dependency of measurement precision on:
 
 is provided at [benchmark calibration report](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/analysis/Benchmark_calibration.docx).
 
+### Execution
+
+Set configurations in `benchmark_conf.json` [file](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/benchmark_conf.json).
+
+Execute `benchmark.py` [file](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/benchmark.py).
+```
+python3 benchmark.py
+```
+
+Report will be generated at `/reports` dir:
+
+- report.csv (summry metrics)
+- comparison.png (graphs with exec time, memory & cpu utilization)
+
+Human-readable output is provided in console.
+
+> :warning: **_NOTE:_**  Check for timeout messages as timedout processes won't be added to report (e.g. Timeout reached for PerformanceInvestigationCpp_v0 with maxPrime = 1000000. Skipping...).
+
 ## Performance analysis & optimization
 
 [Optimization report](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/analysis/Optimization.docx) added at `/analysis` dir with benchmark and profiling results.
