@@ -65,7 +65,7 @@ public:
         int lastInitialPrimeIndex = static_cast<int>(primeNumbers.size()) - 1;
 
         // Run segment sieving for numbers from sqrt(maxPrime) to maxPrime
-        int num_threads = 300;
+        int num_threads = calculateThreadsNumber(maxPrime);
         std::vector<std::thread> threads;
 
         int segmentSieveStart = sqrtMaxPrime + 1;
