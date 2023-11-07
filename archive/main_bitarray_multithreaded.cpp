@@ -52,28 +52,43 @@ public:
 
         // Run simple sieving for numbers up to sqrt(maxPrime)
         int sqrtMaxPrime = static_cast<int>(std::sqrt(maxPrime));
-        simpleSieving(sqrtMaxPrime, std::ref(isPrime), std::ref(primeNumbers));
-
-        // Process maxPrime=3 separately to not run threads for 1 segment element
-        if (maxPrime<=3) {
-            if (maxPrime == 3) {
-                primeNumbers.push_back(3);
-            }
+        if (maxPrime < 100) {
+            simpleSieving(maxPrime, std::ref(isPrime), std::ref(primeNumbers));
             return primeNumbers;
         }
+        else {
+            simpleSieving(sqrtMaxPrime, std::ref(isPrime), std::ref(primeNumbers));
+        }
+
+        //std::cout << "sqrtMaxPrime " << sqrtMaxPrime << std::endl;
 
         int lastInitialPrimeIndex = static_cast<int>(primeNumbers.size()) - 1;
 
         // Run segment sieving for numbers from sqrt(maxPrime) to maxPrime
         int num_threads = calculateThreadsNumber(maxPrime);
+        //std::cout << "num_threads " << num_threads << std::endl;
         std::vector<std::thread> threads;
 
-        int segmentSieveStart = sqrtMaxPrime + 1;
-        int segmentSize = (maxPrime - segmentSieveStart + 1) / num_threads;
-
+        int segmentSize = (maxPrime - sqrtMaxPrime + 1) / num_threads;
+        //std::cout << "segmentSize " << segmentSize << std::endl;
+        int segmentStart = 0;
+        int segmentEnd = sqrtMaxPrime - 1;
         for (int i = 0; i < num_threads; ++i) {
-            int segmentStart = segmentSieveStart + i * segmentSize;
-            int segmentEnd = (i < num_threads - 1) ? (segmentSieveStart + (i + 1) * segmentSize - 1) : maxPrime;
+            segmentStart = segmentEnd + 1;
+
+            // Calculate the end of the segment
+            // Align the end of the segment on a byte boundary, if it's not the last segment
+            segmentEnd += segmentSize;
+            if (i < num_threads - 1) {
+                segmentEnd = ((segmentEnd + 7) / 8) * 8 - 1; // Ensure the segment end is a multiple of 8
+            }
+
+            // Make sure we do not go beyond maxPrime in the last segment
+            if (segmentEnd > maxPrime || i == num_threads - 1) {
+                segmentEnd = maxPrime;
+            }
+
+            //std::cout << "segmentStart " << segmentStart << " segmentEnd " << segmentEnd << std::endl;
 
             threads.emplace_back(segmentSieving,
                                  segmentStart,
