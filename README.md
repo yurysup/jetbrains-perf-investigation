@@ -2,9 +2,23 @@
 Test task solution for JetBrains PerformanceInvestigationCpp.
 
 ## Work done
-- Optimization of initial solution done;
-- Benchmark tool (+ calibration) is created;
-- Performance analysis steps described in a report;
+- Optimization of initial solution done (multiple implementations presented);
+- [Benchmark](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/benchmark.py) tool (+ [calibration](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/analysis/Benchmark_calibration.docx)) is created;
+- Performance analysis & optimization steps described in a [report](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/analysis/Optimization.docx);
+- Performance issues described in a [report](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/analysis/Performance_issues.docx);
+
+## Results achieved
+
+Best processing time achieved (for INT_MAX):
+- v8: 24.9s
+- v6: 26.1s
+- v7: 75.5s
+
+Best memory efficiency achieved (for INT_MAX):
+- v5, v7, v8: ~673Mb
+- v6: ~1Gb
+
+![Benchmark comparison:](reports/v5_v8.png)
 
 ## Installation
 Benchmark requires:
@@ -47,7 +61,7 @@ python3 benchmark.py
 
 Report will be generated at `/reports` dir:
 
-- report.csv (summry metrics)
+- report.csv (summary metrics)
 - comparison.png (graphs with exec time, memory & cpu utilization)
 
 Human-readable output is provided in console.
@@ -58,10 +72,10 @@ Human-readable output is provided in console.
 
 [Optimization report](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/analysis/Optimization.docx) added at `/analysis` dir with benchmark and profiling results.
 
-Issues found in original solution are added as comments to [main_original.cpp](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/archive/main_original.cpp).
+Performance issues found in original solution are added to [issues report](https://github.com/yurysup/jetbrains-perf-investigation/blob/main/analysis/Performance_issues.docx).
 
-### Versions benchmarked
+### Versions available
 
 All compiled binaries can be found at `/bin`.
 All sources (benchmarked app versions) can be found at `/archive`.
-Final implementation is located at `main.cpp`.
+Main implementation is located at `main.cpp`.
