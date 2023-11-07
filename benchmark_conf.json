@@ -5,15 +5,19 @@
         1000,
         10000,
         100000,
-        1000000
+        1000000,
+        10000000,
+        100000000,
+        1000000000,
+        2147483647
     ],
     "benchmark": {
         "iterations": 10,
-        "timeout_seconds": 10
+        "timeout_seconds": 50
     },
     "warmup": {
         "iterations": 1,
-        "timeout_seconds": 30
+        "timeout_seconds": 60
     },
     "binaries": [
         "PerformanceInvestigationCpp_v0",
@@ -21,6 +25,9 @@
         "PerformanceInvestigationCpp_v2",
         "PerformanceInvestigationCpp_v3",
         "PerformanceInvestigationCpp_v4",
-        "PerformanceInvestigationCpp_v5"
+        "PerformanceInvestigationCpp_v5",
+        "PerformanceInvestigationCpp_v6",
+        "PerformanceInvestigationCpp_v7",
+        "PerformanceInvestigationCpp_v8"
     ]
 }
